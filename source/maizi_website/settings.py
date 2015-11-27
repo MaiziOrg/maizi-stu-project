@@ -89,7 +89,7 @@ DATABASES = {
         'NAME': 'maizidb',
         'USER': 'root',
         'PASSWORD': 'hello',
-        'HOST': 'locahost',
+        'HOST': '127.0.0.1',
         'PORT': '3306',
     }
 }
