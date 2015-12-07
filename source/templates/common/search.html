@@ -1,0 +1,22 @@
+<!--搜索-->
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+
+<form class="navbar-form navbar-left" role="search">
+    <div class="form-group">
+        <i class="v5-icon v5-icon-search"></i>
+        <input type="text" class="form-control" id="search" placeholder="搜索你感兴趣的课程" >
+    </div>
+    <div class="search-dp" id="hotkeyword">
+        <!--推荐关键词-->
+        <div class="hotkeyword">
+            <h4>推荐搜索关键词</h4>
+            <ul class="cf">
+                {% for word in recommend_words %}
+                    <li><a href="">{{ word.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</form>

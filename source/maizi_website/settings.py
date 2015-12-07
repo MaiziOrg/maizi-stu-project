@@ -19,6 +19,9 @@ import sys
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# F:\maizi-project\maizi-stu-project\source\maizi
+# os.path.join(BASE_DIR, 'maizi')
+
 # app path settings
 sys.path.insert(0, os.path.join(BASE_DIR, 'maizi'))
 
@@ -124,3 +127,6 @@ TEMPLATE_DIRS = (
 
 # define
 AUTH_USER_MODEL = 'common.UserProfile'
+
+MEDIA_URL = '/uploads/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')

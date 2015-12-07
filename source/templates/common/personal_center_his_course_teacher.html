@@ -2,19 +2,17 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-<title>{% block title %}{% endblock %}</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="{% block keywords%}{% endblock %}">
-<meta name="description" content="{% block description%}{% endblock %}">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>他的课程-教师</title>
 <link href="{% static 'css/base.css' %}" rel="stylesheet">
 <link href="{% static 'css/microoh-v5.css' %}" rel="stylesheet">
 <link href="{% static 'css/animate.css' %}" rel="stylesheet">
 <link href="{% static 'css/develop.css' %}" rel="stylesheet">
-<script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
-{% block custom_css %}{% endblock %}
 <!--[if lt IE 9]>
 <script src="{% static 'js/html5shiv.min.js' %}"></script>
 <script src="{% static 'js/respond.min.js' %}"></script>
@@ -23,18 +21,16 @@
 
 <body>
 <div class="microoh-main">
-  {% block header %}
-      <header class="navbar navbar-default navbar-fixed-top affix" data-offset-top="64">
-  {% endblock %}
+  <header class="navbar navbar-default navbar-fixed-top navbar-v5" data-spy="affix" data-offset-top="64">
     <div class="container">
       <div class="navbar-header">
-      	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#microoh-navbar-collapse">
+      	<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="microoh-navbar-collapse">
           <span class="sr-only">Toggle navigation</span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="" title="麦子学院"><img src="{% static 'images/logo.png' %}"><img src="{% static 'images/logo-font.png' %}"></a>
+        <a class="navbar-brand" href="" title="麦子学院"><img src="{% static 'images/logo.png' %}" class="hidden"><img src="{% static 'images/logo-font.png' %}"></a>
       </div>
       <div class="collapse navbar-collapse" id="microoh-navbar-collapse">
         <ul class="nav navbar-nav navbar-left">
@@ -44,41 +40,58 @@
         </ul>
         {% include 'common/search.html' %}
         <div class="v5-topbar-login">
-{#          <div class="v5-topbar-login-off" style="display:none;">#}
-{#            <a href="#" data-toggle="modal" data-target="#loginModal">登录</a>#}
-{#          </div>#}
           <div class="v5-topbar-login-off">
             <a href="#" data-toggle="modal" data-target="#loginModal">登录</a>
           </div>
-{#          <div class="v5-topbar-login-on cf">#}
-{#            <dl>#}
-{#              <dt>#}
-{#                <a href="" class="dt-username"><span>184545848</span><i class="v5-icon v5-icon-rd"></i></a>#}
-{#              </dt>#}
-{#            </dl>#}
-{#            <a href="" class="dt-usermsg"><i class="v5-icon v5-icon-havemsg"></i><em>3</em></a>#}
-{#          </div>#}
+          <div class="v5-topbar-login-on" style="display:none;">
+            <!--这里是登录后的内容-->
+          </div>
         </div>
       </div>
-      <!--搜索结果-->
-      {% include 'common/search_result.html' %}
+        {% include 'common/search_result.html' %}
     </div>
   </header>
-  {% block second_header %}{% endblock %}
-  {% block breadcrumb %}{% endblock %}
-  {% block container %}{% endblock %}
-  {% block footer%}
-       <div class="v5-footer">
-           <div class="container">
-               <div class="v5-footer-container">
-                   <div class="v5-footer-bottom">
-                       <p>© 2012-2015 <a href="http://www.maiziedu.com">www.maiziedu.com</a> | 服务条款 | 蜀ICP备13014270号-4 Version 4.0.6 release20150115.1</p>
-                   </div>
-               </div>
-           </div>
-       </div>
-       </div>
-   {% endblock %}
+  
+  <div class="container-fluid container-banner container-banner-a">
+    <div class="container container-uinfo">
+      <div class="header-uinfo">
+        <div class="uinfo-head"><img src="{{ BASE_DIR }}/uploads/{{ teacher.avatar_url }}"></div>
+        <div class="uinfo-con">
+          <p>{{ teacher.username }}</p>
+          <p>{{ teacher.position }}</p>
+          <p>{{ teacher.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container uc-boxb">
+    <div class="uc-h1">他的课程</div>
+    <ul class="row my-course">
+        {% for course in teacher_courses %}
+            <li class="col-xs-12 col-sm-6 col-md-6 col-lg-4">
+                <section style="background-color:{{ course.background_color }}">
+                    <a href="">
+                        <img src="{{ BASE_DIR }}/uploads/{{ course.small_icon }}">
+                        <article>
+                            <h3>{{ course.name }}</h3>
+                            <p>班级排名：5/24</p>
+                        </article>
+                    </a>
+                    <a href="" class="opt">查看</a>
+                </section>
+            </li>
+        {% endfor %}
+    </ul>
+  </div>
+  <div class="v5-footer">
+    <div class="container">
+      <div class="v5-footer-container">
+        <div class="v5-footer-bottom">
+          <p>© 2012-2014 maiziedu.com | 服务条款 | 蜀ICP备13014270号-4 Version 4.0.1 release20140721.1</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!--登录-->
@@ -166,96 +179,10 @@
   </div>
 </div>
 
-<!--登陆后-->
-<div class="show-card animated hidden">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tr>
-      <td class="td-userhd"><span class="user-pic"><img src="{% static 'test/15.jpg' %}"></span></td>
-      <td align="right" class="text-align-r">
-        <a href="" class="link-default">184545848</a>
-        <div class="user-email">184545848@mail.com</div>
-      </td>
-    </tr>
-    <tr>
-      <td colspan="2"><a href="" class="btn btn-micv5 btn-md btn-block">进入个人中心</a></td>
-    </tr>
-    <tr>
-      <td colspan="2"><a href="" class="link-cancel">注销</a></td>
-    </tr>
-  </table>
-</div>
-
-<!--意见反馈-->
-<div class="feedback">
-  <div class="feedback-switch"></div>
-  <div class="feedback-title">
-  	 意见反馈
-  </div>
-  <div class="feedback-body">
-    <ul>
-      <li class="form-group"><input type="text" class="form-control" placeholder="请输入您的QQ号方便我们联系您"></li>
-      <li class="form-group"><textarea class="form-control" rows="5" placeholder="使用过程中有什么意见及建议请反 馈给我们吧"></textarea></li>
-      <li class="form-group"><button type="button" class="btn btn-micv5 btn-md btn-block">反馈</button></li>
-    </ul>
-  </div>
-</div>
-
 <script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
 <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
-<script src="{% static 'js/jquery.featureCarousel.min.js' %}"></script>
-<script src="{% static 'js/jquery.carouFredSel.js' %}"></script>
-<script src="{% static 'js/jquery.mousewheel.js' %}"></script>
 <script src="{% static 'js/bootstrap.min.js' %}"></script>
-<script src="{% static 'js/jPages.min.js' %}"></script>
-<script src="{% static 'js/jquery.jscrollpane.min.js' %}"></script>
 <script src="{% static 'js/microoh-v5.js' %}"></script>
 <script src="{% static 'js/ie10-viewport-bug-workaround.js' %}"></script>
-<script type="text/javascript">
-$(function() {
-	//大图切换
-	var carousel = $("#carousel").featureCarousel({
-		topPadding: 0,
-		sidePadding: 0,
-		smallFeatureOffset:	100,
-		trackerSummation: false
-	});
-	//首页名师切换
-	$('#foo').carouFredSel({
-		auto: false,
-		prev: '#prev',
-		next: '#next',
-		mousewheel: true,
-		items:{
-			visible:4,
-			minimum:1
-		},
-		scroll:{
-			items:1,
-			duration:1000
-		}
-	});
-  
-	//登录后 
-  function show_card(){
-    var _parent_left = $('.v5-topbar-login').offset().left;
-    var _parent_outw = $('.v5-topbar-login').outerWidth();
-    var _this_outw = $('.show-card').outerWidth();
-    var _this_left = Math.abs(_parent_left - (_this_outw - _parent_outw));  
-    $('.show-card').css({
-      'left': _this_left
-    })
-  }
-  show_card();
-  $(window).resize(function(){
-    show_card();
-  });
-  
-  $('.scroll-pane').jScrollPane({
-      autoReinitialise: true
-    });
-});
-</script>
-{% block custom_script %}{% endblock %}
-{% block popup %}{% endblock %}
 </body>
 </html>

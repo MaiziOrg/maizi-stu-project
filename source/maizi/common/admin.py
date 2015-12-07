@@ -40,8 +40,8 @@ admin.site.app_index = index_decorator(admin.site.app_index)
 # 用户管理类
 class UserProfileAdmin(UserAdmin):
     fieldsets = (
-        (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'email')}),
+        (None, {'fields': ('username', 'avatar_url', 'password')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'email', 'position', 'description')}),
         ('Permissions', {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
         ('Important dates', {'fields': ('last_login',)}),
