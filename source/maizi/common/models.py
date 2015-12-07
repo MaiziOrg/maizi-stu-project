@@ -11,8 +11,7 @@ from datetime import datetime
 from django.db import models
 from django.core.mail import send_mail
 from django.conf import settings
-from django.contrib.auth.models import BaseUserManager, \
-    AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 
 class Ad(models.Model):
 
