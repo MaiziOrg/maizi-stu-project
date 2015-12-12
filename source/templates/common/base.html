@@ -14,6 +14,7 @@
 <link href="{% static 'css/animate.css' %}" rel="stylesheet">
 <link href="{% static 'css/develop.css' %}" rel="stylesheet">
 <script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+{#<script type="text/javascript" src="{% static 'js/django_ajax_post.js' %}"></script>#}
 {% block custom_css %}{% endblock %}
 <!--[if lt IE 9]>
 <script src="{% static 'js/html5shiv.min.js' %}"></script>
@@ -44,9 +45,6 @@
         </ul>
         {% include 'common/search.html' %}
         <div class="v5-topbar-login">
-{#          <div class="v5-topbar-login-off" style="display:none;">#}
-{#            <a href="#" data-toggle="modal" data-target="#loginModal">登录</a>#}
-{#          </div>#}
           <div class="v5-topbar-login-off">
             <a href="#" data-toggle="modal" data-target="#loginModal">登录</a>
           </div>
@@ -92,14 +90,14 @@
       <div class="modal-body">
         <section class="box-login v5-input-txt" id="box-login">
           <ul>
-            <li class="form-group has-error"><input type="text" class="form-control" placeholder="请输入邮箱账号/手机号"></li>
-            <li class="form-group"><input type="password" class="form-control" placeholder="请输入密码"></li>
+            <li class="form-group has-error"><input type="text" id="login-username" class="form-control" placeholder="请输入邮箱账号/手机号"></li>
+            <li class="form-group"><input type="password" id="login-password" class="form-control" placeholder="请输入密码"></li>
           </ul>
           <p class="good-tips"><a href="#" data-toggle="modal" data-target="#forgetpswModal" id="btnForgetpsw" class="fr">忘记密码？</a>还没有账号？<a href="" data-toggle="modal" data-target="#registerModal" id="btnRegister">立即注册</a></p>
           <div>
-            <button type="button" class="btn btn-micv5 btn-block">登录</button>
+            <button type="button" id="login-button" class="btn btn-micv5 btn-block">登录</button>
           </div>
-          <div class="tips-error bg-danger">错误提示</div>
+          <div id="login-error" class="tips-error bg-danger"></div>
         </section>
       </div>
     </div>
@@ -144,9 +142,9 @@
           </ul>
           <div class="tab-content">
             <div class="tab-pane active" id="register-email">
-            	<div class="form-group"><input type="text" class="form-control" placeholder="请输入邮箱账号"></div>
-              <div class="form-group"><input type="password" class="form-control" placeholder="请输入密码"></div>
-              <div class="form-group cf"><input type="text" class="form-control form-control-captcha fl" placeholder="请输入验证码"><span class="v5-yzm fr"><a href=""><img src="{% static 'test/yzm.jpg' %}">换一张</a></span></div>
+            	<div class="form-group"><input type="text" id="mailbox-username" class="form-control" placeholder="请输入邮箱账号"></div>
+              <div class="form-group"><input type="password" id="register-password" class="form-control" placeholder="请输入密码"></div>
+              <div class="form-group cf"><input type="text" id="register-yzm" class="form-control form-control-captcha fl" placeholder="请输入验证码"><span class="v5-yzm fr"><a href=""><img src="{% static 'test/yzm.jpg' %}">换一张</a></span></div>
             </div>
             <div class="tab-pane" id="register-mobile">
             	<div class="form-group cf"><input type="text" class="form-control form-control-phone fl" placeholder="请输入手机号"><span class="fr"><button type="button" class="btn btn-micv5 btn-send">发送验证码</button></span></div>
@@ -157,9 +155,9 @@
           </div>
           <p class="good-tips">已经有账号？<a href="#" data-toggle="modal" data-target="#loginModal" id="btnLogin">立即登录</a></p>
           <div>
-            <button type="button" class="btn btn-micv5 btn-block">注册并登录</button>
+            <button type="button" id="register-button" class="btn btn-micv5 btn-block">注册并登录</button>
           </div>
-          <div class="tips-error bg-danger">错误提示</div>
+          <div id="register-error" class="tips-error bg-danger"></div>
         </section>
       </div>
     </div>
@@ -200,7 +198,7 @@
   </div>
 </div>
 
-<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
+{#<script src="{% static 'js/jquery-1.11.1.min.js' %}"></script>#}
 <script src="{% static 'js/jquery-migrate-1.2.1.min.js' %}"></script>
 <script src="{% static 'js/jquery.featureCarousel.min.js' %}"></script>
 <script src="{% static 'js/jquery.carouFredSel.js' %}"></script>

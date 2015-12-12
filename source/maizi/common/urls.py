@@ -12,5 +12,6 @@ from django.conf.urls import patterns, url
 urlpatterns = patterns('common.views',
     url(r'^$', 'index', name='index'),
     url(r'^search/$', 'search', name='search'),
-    url(r'^teacher_course/(?P<teacher_id>[0-9]+)/$', 'teacher_course', name='teacher_course')
+    url(r'^pagination/$', 'pagination', name='pagination'),
+    url(r'^teacher_course/(?P<teacher_id>[0-9]+)/$', 'teacher_course', name='teacher_course'),
 )

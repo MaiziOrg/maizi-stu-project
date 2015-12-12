@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<script type="text/javascript" src="{% static 'js/course-pagination.js' %}"></script>
+
+<div class="tabs-container tab-content">
+    {% for courses in courses_list %}
+        <div class="v5-course-item tab-pane fade {% if courses.id == "new" %}in active{% endif %}" id="{{ courses.id }}" data-holder="{{ courses.holder }}">
+            <div class="page-item">
+                <ul id="{{ courses.id }}-{{ courses.id }}" class="row course-list-index">
+                    {% for course in courses %}
+                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
+                            <a href="javascript:void(0)">
+                                <dl>
+                                    <dt><div><img src="uploads/{{ course.image }}"></div></dt>
+                                    <dd>
+                                        <span>{{ course.name }}</span>
+                                        <p>{{ course.student_count }}人正在学习</p>
+                                    </dd>
+                                </dl>
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="page-bg-w">
+                <div class="row v5-pages">
+                    <div class="col-sm-12 v5-pages-list">
+                        <ul id="{{ courses.id }}-{{ courses.id }}-{{ courses.id }}" class="row fr">
+                            {% if courses.has_previous %}
+                                <li><a id="{{ courses.number }}+-1" href="javascript:void(0)" class="v5-icon v5-icon-prev"></a></li>
+                            {% endif %}
+                            {% for page in courses.page_range %}
+                                <li><a href="javascript:void(0)" class="page-num {% if page == courses.number %}active{% endif %}">{{ page }}</a></li>
+                            {% endfor %}
+                            {% if courses.has_next %}
+                                <li><a id="{{ courses.number }}+1" href="javascript:void(0)" class="v5-icon v5-icon-next"></a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

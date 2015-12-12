@@ -3,7 +3,7 @@
 
 '''
 Created on 2015/10/27
-@author: yopoing
+@author: fangqingsong
 Model管理，包含各个模块所需要的数据模型，由项目组长统一管理。
 '''
 
