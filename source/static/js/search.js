@@ -1,45 +1,77 @@
 $(document).ready(function(){
+    var career_course = $("#career_course");
+    var course = $("#course");
+
     var obj = $("#search");
     obj.keyup(function(){
         var input_value = obj.val();
-        var career_course = $("#career_course");
-        var course = $("#course");
-
+        prompt(career_course, course);
         $.ajax({
                 type : "get",
-                //urlºóÃæÌí¼ÓÒ»¸ö"&"£¬·şÎñÆ÷¶Ë¿ÉÒÔ»ñÈ¡µ½²»Í¬ÊıÁ¿µÄ¿Õ¸ñÖµ
+                //urlè·¯å¾„æ·»åŠ åç¼€"&"ï¼Œå¯ä»¥ç²¾ç¡®åœ°è·å–åˆ°input_valueçš„å€¼ï¼ˆä¸€ä¸ªç©ºæ ¼è¿˜æ˜¯å¤šä¸ªç©ºæ ¼ï¼‰
                 url : "/search/?value="+input_value+"&",
                 dataType: "json",
                 async: true,
                 success:function(data)
                 {
-                    // ½«Çå¿ÕµÄ´úÂë·ÅÈësuccessµÄ»Øµ÷º¯ÊıÖĞ£¬ÓĞĞ§µØ½â¾öÁË¿ìËÙÊäÈëµ¼ÖÂÖØ¸´³öÏÖµÄ½á¹û¡£
-                    career_course.empty();
-                    course.empty();
-
-                    $.each(data, function(index, content){
-                        var get_value = content.fields.name;
-
-                        if(content.model == "common.careercourse")
-                        {
-                            career_course.append('<a href="" style="background-color:' + content.fields.course_color + ';">' + get_value + '</a>');
-                        }
-                        else
-                        {
-                            course.append('<a href="" style="background-color:red;">' + get_value + '</a>');
-                        }
-                    });
-
-                    if(career_course.is(":empty"))
-                    {
-                        career_course.append("No career course...");
-                    }
-
-                    if(course.is(":empty"))
-                    {
-                        course.append("No course...");
-                    }
+                    processData(data);
                 }
         });
     });
+
+    var $obj = $("#search-ul a");
+    $obj.click(function(){
+        var keyword =$(this).text();
+        prompt(career_course, course);
+        $.ajax({
+                type : "get",
+                url : "/search/?value="+keyword,
+                dataType: "json",
+                async: true,
+                success:function(data)
+                {
+                    processData(data);
+                }
+        });
+    });
+
+    // ajaxè¿‡ç¨‹ä¸­æ˜¾ç¤ºçš„çŠ¶æ€
+    function prompt(var1, var2)
+    {
+        var1.empty();
+        var1.append("æœç´¢ä¸­...");
+        var2.empty();
+        var2.append("æœç´¢ä¸­...");
+    }
+
+    // å¤„ç†ajaxåå°è¿”å›çš„æ•°æ®
+    function processData(data)
+    {
+        //å°†æ¸…é™¤çš„ä¸¤è¡Œä»£ç æ”¾åœ¨successå‡½æ•°ä¸­ï¼Œæœ‰æ•ˆåœ°è§£å†³äº†é‡å¤æ·»åŠ çš„é—®é¢˜
+        career_course.empty();
+        course.empty();
+
+        $.each(data, function(index, content){
+            var get_value = content.fields.name;
+
+            if(content.model == "common.careercourse")
+            {
+                career_course.append('<a href="" style="background-color:' + content.fields.course_color + ';">' + get_value + '</a>');
+            }
+            else
+            {
+                course.append('<a href="" style="background-color:red;">' + get_value + '</a>');
+            }
+        });
+
+        if(career_course.is(":empty"))
+        {
+            career_course.append("æ— ");
+        }
+
+        if(course.is(":empty"))
+        {
+            course.append("æ— ");
+        }
+    }
 });

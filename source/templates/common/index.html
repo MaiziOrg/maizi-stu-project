@@ -1,10 +1,11 @@
 {% extends "common/base.html" %}
 {% load staticfiles %}
+<script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js' %}"></script>
 {% block title %}麦子学院-专业IT职业教育平台{% endblock %}
 {% block keywords%}首页关键词{% endblock %}
 {% block description%}首页描述{% endblock %}
 {% block header %}
-<header class="navbar navbar-default navbar-fixed-top" data-spy="affix" data-offset-top="64">
+<header class="navbar navbar-default navbar-fixed-top" data-spy="affix" data-offset-top="64"/>
 {% endblock %}
 {% block container %}
 <div class="v5-banner-big">
@@ -32,110 +33,7 @@
             <li><a href="#most" role="tab" data-toggle="tab">最多播放</a></li>
             <li><a href="#hot" role="tab" data-toggle="tab">最具人气</a></li>
           </ul>
-          <div class="tabs-container tab-content">
-            <div class="v5-course-item tab-pane fade in active" id="new" data-holder="holdernew">
-              <div class="page-item">
-                <ul class="row course-list-index">
-                    {% for course in latest_courses %}
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            <a href="">
-                                <dl>
-                                    <dt><div><img src="uploads/{{ course.image }}"></div></dt>
-                                    <dd>
-                                        <span>{{ course.name }}</span>
-                                        <p>{{ course.student_count }}人正在学习</p>
-                                    </dd>
-                                </dl>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-              </div>
-              <div class="page-bg-w">
-                <div class="row v5-pages">
-                  <div class="col-sm-12 v5-pages-list">
-                    <ul class="row fr">
-                      <li><a href="" class="v5-icon v5-icon-prev"></a></li>
-                      <li><a href="" class="page-num active">1</a></li>
-                      <li><a href="" class="page-num">2</a></li>
-                      <li><a href="" class="page-num">3</a></li>
-                      <li><a href="" class="page-num">4</a></li>
-                      <li><a href="" class="page-num">5</a></li>
-                      <li><a href="" class="v5-icon v5-icon-next"></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="v5-course-item tab-pane fade" id="most" data-holder="holdermost">
-            	<div class="page-item">
-                <ul class="row course-list-index">
-                    {% for course in most_play_courses %}
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            <a href="">
-                                <dl>
-                                    <dt><div><img src="uploads/{{ course.image }}"></div></dt>
-                                    <dd>
-                                        <span>{{ course.name }}</span>
-                                        <p>{{ course.student_count }}人正在学习</p>
-                                    </dd>
-                                </dl>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-              </div>
-              <div class="page-bg-w">
-                <div class="row v5-pages">
-                  <div class="col-sm-12 v5-pages-list">
-                    <ul class="row fr">
-                      <li><a href="" class="v5-icon v5-icon-prev"></a></li>
-                      <li><a href="" class="page-num active">1</a></li>
-                      <li><a href="" class="page-num">2</a></li>
-                      <li><a href="" class="page-num">3</a></li>
-                      <li><a href="" class="page-num">4</a></li>
-                      <li><a href="" class="page-num">5</a></li>
-                      <li><a href="" class="v5-icon v5-icon-next"></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="v5-course-item tab-pane fade" id="hot" data-holder="holderhot">
-              <div class="page-item">
-                <ul class="row course-list-index">
-                    {% for course in most_hot_courses %}
-                        <li class="col-xs-12 col-sm-6 col-md-6 col-lg-3">
-                            <a href="">
-                                <dl>
-                                    <dt><div><img src="uploads/{{ course.image }}"></div></dt>
-                                    <dd>
-                                        <span>{{ course.name }}</span>
-                                        <p>{{ course.student_count }}人正在学习</p>
-                                    </dd>
-                                 </dl>
-                            </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-              </div>
-              <div class="page-bg-w">
-                <div class="row v5-pages">
-                  <div class="col-sm-12 v5-pages-list">
-                    <ul class="row fr">
-                      <li><a href="" class="v5-icon v5-icon-prev"></a></li>
-                      <li><a href="" class="page-num active">1</a></li>
-                      <li><a href="" class="page-num">2</a></li>
-                      <li><a href="" class="page-num">3</a></li>
-                      <li><a href="" class="page-num">4</a></li>
-                      <li><a href="" class="page-num">5</a></li>
-                      <li><a href="" class="v5-icon v5-icon-next"></a></li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+            {% include 'common/course_show.html' %}
         </div>
       </div>
     </div>
